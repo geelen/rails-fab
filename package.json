@@ -8,10 +8,11 @@
     "@rails/ujs": "^6.0.0-alpha",
     "@rails/webpacker": "^4.0.7",
     "cheerio": "^1.0.0-rc.3",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.41.0"
   },
   "scripts": {
-    "build": "rm -rf public/packs && bin/webpack",
+    "build": "rm -rf public/packs && webpack --config ./config/webpack/production.js",
     "build:fab": "npm run build && npm run fab:compile",
     "fab:clean": "rm -rf .fab",
     "fab:prepare": "mkdir -p .fab/intermediate/{_server,_assets} && cp -R fab-server/* .fab/intermediate/_server && cp -R public/packs/js/* .fab/intermediate/_assets && cp public/packs/manifest.json .fab/intermediate/_server",
