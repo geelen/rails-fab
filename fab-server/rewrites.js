@@ -1,24 +1,20 @@
 const cheerio = require('cheerio')
+const manifest = require('./manifest.json')
+const path = require('path')
+console.log({manifest})
+const client_js = path.basename(manifest['client.js'])
 
 const rewriteAssets = ($, ASSETS_HOST) => {
   $('script').each((i, elem) => {
     const src = $(elem).attr('src')
-    if (src && src.startsWith(`${ASSETS_HOST}/premium/assets/React/app-`)) {
-      $(elem).attr('src', `/React/app.js`)
-    } else if (src && src.startsWith(`${ASSETS_HOST}/premium/assets/dynamic-`)) {
-      $(elem).attr('src', `/React/app.css`)
-    }
-  })
-  $('link').each((i, elem) => {
-    const href = $(elem).attr('href')
-    if (href && href.startsWith(`${ASSETS_HOST}/premium/assets/dynamic-`)) {
-      $(elem).attr('href', `/React/app.css`)
+    if (src && src.startsWith(`/packs/js/client`)) {
+      $(elem).attr('src', `/_assets/${client_js}`)
     }
   })
 }
 
-module.exports = (html, ASSETS_HOST) => {
+module.exports = (html) => {
   const $ = cheerio.load(html)
-  rewriteAssets($, ASSETS_HOST)
+  rewriteAssets($)
   return $.html()
 }
