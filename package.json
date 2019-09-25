@@ -15,7 +15,7 @@
     "build": "rm -rf public/packs && webpack --config ./config/webpack/production.js",
     "build:fab": "npm run build && npm run fab:compile",
     "fab:clean": "rm -rf .fab",
-    "fab:prepare": "mkdir -p .fab/intermediate/{_server,_assets} && cp -R fab-server/* .fab/intermediate/_server && cp -R public/packs/js/* .fab/intermediate/_assets && cp public/packs/manifest.json .fab/intermediate/_server",
+    "fab:prepare": "mkdir -p .fab/intermediate/_server mkdir -p .fab/intermediate/_assets && cp -R fab-server/* .fab/intermediate/_server && cp -R public/packs/js/* .fab/intermediate/_assets && cp public/packs/manifest.json .fab/intermediate/_server",
     "fab:compile": "npm run fab:clean && npm run fab:prepare && fab-compile"
   },
   "version": "0.1.0"
